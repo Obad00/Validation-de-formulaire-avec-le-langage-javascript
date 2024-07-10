@@ -26,7 +26,7 @@ form {
     flex-direction: column;
 }
 
-form .form-group {
+.form-group {
     margin-bottom: 15px;
 }
 
@@ -35,12 +35,24 @@ label {
     margin-bottom: 5px;
 }
 
+.input-wrapper {
+    position: relative;
+}
+
 input {
-    padding: 8px;
+    padding: 8px 30px 8px 8px; /* Adjusted padding to accommodate the eye icon */
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
     box-sizing: border-box;
+}
+
+.toggle-motdepasse {
+    position: absolute;
+    right: 8px; /* Adjusted position to align with the end of the input */
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
 button {
@@ -51,6 +63,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+    margin-top: 10px; /* Ajout d'un espacement entre le dernier champ et le bouton */
 }
 
 button:hover {
@@ -73,20 +86,4 @@ input.error {
     font-size: 18px;
     margin-top: 20px;
     text-align: center;
-}
-
-.motdepass-container {
-    position: relative;
-}
-
-.motdepass-container input {
-    padding-right: 30px; /* Add padding to make space for the eye icon */
-}
-
-.toggle-motdepass {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
 }

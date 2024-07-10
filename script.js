@@ -162,9 +162,23 @@ function validateForm() {
     const isConfirmPasswordValid = validateConfirmPassword();
 
     if (isPrenomValid && isNomValid && isEmailValid && isPasswordValid && isConfirmPasswordValid) {
+        const participant = {
+            prenom: document.getElementById('prenom').value.trim(),
+            nom: document.getElementById('nom').value.trim(),
+            email: document.getElementById('email').value.trim()
+        };
+
+        saveParticipant(participant);
+        document.getElementById('monFormulaire').reset();
         document.getElementById('monFormulaire').style.display = 'none';
         document.getElementById('successMessage').style.display = 'block';
     }
+}
+
+function saveParticipant(participant) {
+    let participants = JSON.parse(localStorage.getItem('participants')) || [];
+    participants.push(participant);
+    localStorage.setItem('participants', JSON.stringify(participants));
 }
 
 function togglePasswordVisibility(fieldId) {
