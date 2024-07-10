@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Participants</title>
+    <style>
+        /* Style CSS facultatif pour la mise en page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .participants-list {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .participant {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="participants-list">
+        <h2>Liste des Participants</h2>
+        <div id="participants"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            displayParticipants();
+        });
+
+        function displayParticipants() {
+            const participants = getParticipantsFromLocalStorage();
+
+            const participantsContainer = document.getElementById('participants');
+            participantsContainer.innerHTML = '';
+
+            if (participants && participants.length > 0) {
+                participants.forEach(participant => {
+                    const participantDiv = document.createElement('div');
+                    participantDiv.classList.add('participant');
+                    participantDiv.textContent = `${participant.prenom} ${participant.nom}`;
+                    participantsContainer.appendChild(participantDiv);
+                });
+            } else {
+                participantsContainer.textContent = 'Aucun participant inscrit pour le moment.';
+            }
+        }
+
+        function getParticipantsFromLocalStorage() {
+            return JSON.parse(localStorage.getItem('participants')) || [];
+        }
+    </script>
+</body>
+</html>
