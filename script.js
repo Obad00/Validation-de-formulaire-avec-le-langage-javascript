@@ -9,23 +9,32 @@ document.getElementById('monFormulaire').addEventListener('submit', function(eve
     document.getElementById('confirmPasswordError').textContent = '';
 
     // Récupérer les valeurs des champs
-    const prenom = document.getElementById('prenom').value;
-    const nom = document.getElementById('nom').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
+    const prenom = document.getElementById('prenom').value.trim();
+    const nom = document.getElementById('nom').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const confirmPassword = document.getElementById('confirmPassword').value.trim();
     
     let isValid = true;
+
+    // Expression régulière pour vérifier l'absence de chiffres
+    const noDigitsPattern = /^[^\d]*$/;
 
     // Validation du prénom
     if (prenom.length < 3 || prenom.length > 15) {
         document.getElementById('prenomError').textContent = 'Le prénom doit contenir entre 3 et 15 caractères.';
+        isValid = false;
+    } else if (!noDigitsPattern.test(prenom)) {
+        document.getElementById('prenomError').textContent = 'Le prénom ne doit pas contenir de chiffres.';
         isValid = false;
     }
 
     // Validation du nom
     if (nom.length < 3 || nom.length > 15) {
         document.getElementById('nomError').textContent = 'Le nom doit contenir entre 3 et 15 caractères.';
+        isValid = false;
+    } else if (!noDigitsPattern.test(nom)) {
+        document.getElementById('nomError').textContent = 'Le nom ne doit pas contenir de chiffres.';
         isValid = false;
     }
 
