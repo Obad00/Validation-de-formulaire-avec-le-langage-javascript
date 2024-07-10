@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de soumission</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="form-container">
+        <form id="monFormulaire">
+            <div>
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" name="prenom">
+                <span class="error" id="prenomError"></span>
+            </div>
+            <div>
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom">
+                <span class="error" id="nomError"></span>
+            </div>
+            <div>
+                <label for="email">Adresse Email :</label>
+                <input type="email" id="email" name="email">
+                <span class="error" id="emailError"></span>
+            </div>
+            <div class="motdepasse-container">
+                <label for="password">Mot de passe :</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" name="password">
+                    <span class="toggle-motdepasse" onclick="togglePasswordVisibility('password')">&#128065;</span>
+                </div>
+                <span class="error" id="passwordError"></span>
+            </div>
+            <div class="motdepasse-container">
+                <label for="confirmPassword">Confirmer le mot de passe :</label>
+                <div class="input-wrapper">
+                    <input type="password" id="confirmPassword" name="confirmPassword">
+                    <span class="toggle-motdepasse" onclick="togglePasswordVisibility('confirmPassword')">&#128065;</span>
+                </div>
+                <span class="error" id="confirmPasswordError"></span>
+            </div>
+            <div>
+                <button type="submit">Soumettre</button>
+            </div>
+        </form>
+        <div id="successMessage" style="display:none;">
+            <p>Succès ! Le formulaire a été bien soumis.</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
