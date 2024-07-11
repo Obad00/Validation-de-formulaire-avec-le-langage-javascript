@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,10 +20,31 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         .participant {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 10px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+        .actions button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .actions .edit {
+            background-color: #0086d4;
+            color: white;
+        }
+        .actions .delete {
+            background-color: #F44336;
+            color: white;
         }
     </style>
 </head>
@@ -45,10 +66,32 @@
             participantsContainer.innerHTML = '';
 
             if (participants && participants.length > 0) {
-                participants.forEach(participant => {
+                participants.forEach((participant, index) => {
                     const participantDiv = document.createElement('div');
                     participantDiv.classList.add('participant');
-                    participantDiv.textContent = `${participant.prenom} ${participant.nom}`;
+
+                    const participantInfo = document.createElement('span');
+                    participantInfo.textContent = `${participant.prenom} ${participant.nom}`;
+                    
+                    const actionsDiv = document.createElement('div');
+                    actionsDiv.classList.add('actions');
+
+                    const editButton = document.createElement('button');
+                    editButton.classList.add('edit');
+                    editButton.textContent = 'Modifier';
+                    editButton.onclick = () => editParticipant(index);
+
+                    const deleteButton = document.createElement('button');
+                    deleteButton.classList.add('delete');
+                    deleteButton.textContent = 'Supprimer';
+                    deleteButton.onclick = () => deleteParticipant(index);
+
+                    actionsDiv.appendChild(editButton);
+                    actionsDiv.appendChild(deleteButton);
+
+                    participantDiv.appendChild(participantInfo);
+                    participantDiv.appendChild(actionsDiv);
+
                     participantsContainer.appendChild(participantDiv);
                 });
             } else {
@@ -58,6 +101,26 @@
 
         function getParticipantsFromLocalStorage() {
             return JSON.parse(localStorage.getItem('participants')) || [];
+        }
+
+        function deleteParticipant(index) {
+            let participants = getParticipantsFromLocalStorage();
+            participants.splice(index, 1);
+            localStorage.setItem('participants', JSON.stringify(participants));
+            displayParticipants();
+        }
+
+        function editParticipant(index) {
+            let participants = getParticipantsFromLocalStorage();
+            let participant = participants[index];
+            let newPrenom = prompt("Modifier le prénom :", participant.prenom);
+            let newNom = prompt("Modifier le nom :", participant.nom);
+
+            if (newPrenom && newNom) {
+                participants[index] = { prenom: newPrenom, nom: newNom };
+                localStorage.setItem('participants', JSON.stringify(participants));
+                displayParticipants();
+            }
         }
     </script>
 </body>
